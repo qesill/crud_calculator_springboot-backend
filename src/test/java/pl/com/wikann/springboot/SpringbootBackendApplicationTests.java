@@ -46,5 +46,9 @@ class MathExpressionCalculatorTest {
 		// Test dla błędnego równania z niedozwolonymi zestawieniem operatorów
 		assertThrows(IllegalArgumentException.class, () ->
 				MathExpressionCalculator.calculateResult("1++1+2"));
+
+		// Test dla błędnego równania z dzieleniem przez zero
+		assertThrows(ArithmeticException.class, () ->
+				MathExpressionCalculator.calculateResult("1/0"));
 	}
 }

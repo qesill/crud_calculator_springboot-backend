@@ -1,8 +1,6 @@
 package pl.com.wikann.springboot.utils;
 
-class BiOperator {
-
-    float apply(float left, float right) {
-        return 0; // Do implementacji w klasach dziedziczących
-    }
+// Abstrakcyjna klasa reprezentująca operator dwuargumentowy
+abstract class BiOperator {
+    abstract float apply(float left, float right); // Metoda abstrakcyjna, która będzie implementowana przez konkretne operatory
 }

@@ -1,5 +1,6 @@
 package pl.com.wikann.springboot.utils;
 
+// Klasa reprezentująca operator dzielenia
 class DivideOperator extends BiOperator {
     @Override
     float apply(float left, float right) {

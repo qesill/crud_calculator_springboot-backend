@@ -1,5 +1,6 @@
 package pl.com.wikann.springboot.utils;
 
+// Klasa reprezentująca operator odejmowania
 class SubtractOperator extends BiOperator {
     @Override
     float apply(float left, float right) {

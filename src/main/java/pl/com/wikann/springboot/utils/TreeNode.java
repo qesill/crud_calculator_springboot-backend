@@ -1,5 +1,6 @@
 package pl.com.wikann.springboot.utils;
 
+// Klasa reprezentująca węzeł drzewa wyrażenia
 class TreeNode {
     Object value;
     TreeNode left;
