@@ -7,9 +7,25 @@ import java.util.Stack;
 public class ExpressionTreeBuilder {
 
     public float calculate(String expression) {
+        expression = cleanAndValidateExpression(expression);
         Expression expressionObj = buildExpression(expression);
         float result = expressionObj.evaluate();
         return result;
+    }
+
+    private String cleanAndValidateExpression(String expression) {
+        // Usuń wszystkie białe znaki przed operacjami
+        expression = expression.replaceAll("\\s+", "");
+        // Sprawdź, czy w wyrażeniu są tylko dozwolone znaki
+        if (!expression.matches("[\\d.\\+\\-*/()]+")) {
+            throw new IllegalArgumentException("Użyto niedozwolonych znaków");
+        }
+        // Sprawdź, czy nie występują obok siebie nieprawidłowe zestawienia operatorów
+            if (expression.matches(".*[+*/-][+*/].*")) {
+                throw new IllegalArgumentException("Niedozwolone zestawienie operatorów");
+            }
+
+        return expression;
     }
 
     // Metoda budująca drzewo wyrażenia na podstawie podanego ciągu znaków
@@ -28,6 +44,11 @@ public class ExpressionTreeBuilder {
         // Iteracja po znakach w wyrażeniu
         for (int i = 0; i < expression.length(); i++) {
             char c = expression.charAt(i);
+        // Pomijaj białe znaki
+            if (Character.isWhitespace(c)) {
+                continue;
+            }
+        // Jeśli znak to cyfra lub kropka (część liczby)
             if (Character.isDigit(c) || c == '.') {
                 currentToken.append(c);
             }
@@ -46,8 +67,6 @@ public class ExpressionTreeBuilder {
                     tokensList.add(String.valueOf(c));
                 }
             }
-
-
             // Jeśli znak to operator lub nawias
             else if (isOperator(String.valueOf(c)) || c == '(' || c == ')') {
                 // Jeśli aktualny token nie jest pusty, dodaj go do listy tokenów
@@ -59,9 +78,6 @@ public class ExpressionTreeBuilder {
                 // Dodaj operator lub nawias jako oddzielny token
                 tokensList.add(String.valueOf(c));
             }
-
-
-            // Jeśli znak to cyfra lub kropka (część liczby)
         }
 
         // Dodaj ostatni niepusty token, jeśli istnieje
