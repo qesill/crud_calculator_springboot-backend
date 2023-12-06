@@ -1,6 +1,8 @@
 package pl.com.wikann.springboot.model;
 
 import jakarta.persistence.*;
+import org.springframework.beans.factory.annotation.Autowired;
+import pl.com.wikann.springboot.service.CalculationService;
 import pl.com.wikann.springboot.utils.MathExpressionCalculator;
 
 @Entity
@@ -15,8 +17,11 @@ public class Calculation {
     @Column(name = "result")
     private Float result;
 
-    public Calculation() {
+    @Transient // Oznaczam to pole jako tymczasowe, aby uniknąć zapisu do bazy danych
+    private CalculationService calculationService;
 
+    public Calculation() {
+        this.calculationService = new CalculationService();
     }
 
     public Calculation(String equation, Float result) {
@@ -38,7 +43,7 @@ public class Calculation {
 
     public void setEquation(String equation) {
         this.equation = equation;
-        this.result = MathExpressionCalculator.calculateResult(equation);
+        this.result = calculationService.calculateResult(equation);
     }
 
     public Float getResult() {
