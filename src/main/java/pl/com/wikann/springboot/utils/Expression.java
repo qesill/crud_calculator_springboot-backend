@@ -1,17 +1,14 @@
 package pl.com.wikann.springboot.utils;
 
+// Klasa reprezentująca wyrażenie matematyczne
 class Expression {
-    private String expression;
+    TreeNode root;
 
-    public Expression(String expression) {
-        this.expression = expression;
+    public Expression(TreeNode root) {
+        this.root = root;
     }
 
-    public String getExpression() {
-        return expression;
-    }
-
-    public void setExpression(String expression) {
-        this.expression = expression;
+    public float evaluate() {
+        return ExpressionTreeBuilder.calculateTree(root);
     }
 }

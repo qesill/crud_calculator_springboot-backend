@@ -1,7 +1,7 @@
 package pl.com.wikann.springboot.utils;
 
 class Variable {
-    private float value;
+    float value;
 
     public Variable(float value) {
         this.value = value;
